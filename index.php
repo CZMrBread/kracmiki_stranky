@@ -9,7 +9,45 @@
 </head>
 <body class="bg-light">
 <?php include("navbar.html")?>
-<main class="container">
+<main class="container pt-5">
+    <?php
+    $mysqli = new mysqli("localhost","root","","rozvoz");
+    // Check connection
+    if ($mysqli -> connect_errno) {
+        echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
+        exit();
+    }
+?>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>Id</th>
+        <th>Jméno</th>
+        <th>Příjmení</th>
+    </tr>
+<?php
+$kuryri = mysqli_query($mysqli, "SELECT * FROM kuryr", MYSQLI_USE_RESULT);
+foreach ($kuryri as $kuryr){
+        echo "<tr>";
+        echo "<td>$kuryr[idk]</td>";
+        echo "<td>$kuryr[jmeno]</td>";
+        echo "<td>$kuryr[prijmeni]</td>";
+        echo "</tr>";
+    }
+?>
+</table>
+<table class="table table-striped table-hover">
+    <?php
+    $pocet_obj = mysqli_query($mysqli, "SELECT count(*) as pocet FROM objednavka", MYSQLI_USE_RESULT);
+    echo "<tr>";
+    echo "<th>Počet objednávek</th>";
+    foreach ($pocet_obj as $pocet){
+        echo "<td>$pocet[pocet]</td>";
+    }
+    echo "</tr>"
+    ?>
+</table>
+
+
 
 </main>
 
