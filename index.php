@@ -8,7 +8,7 @@
     <title>Main</title>
 </head>
 <body class="bg-light">
-<?php include("navbar.html")?>
+<?php include("navbar.html") ?>
 <main class="container pt-5">
     <?php
     $mysqli = new mysqli("localhost","root","","rozvoz");
@@ -42,6 +42,34 @@ foreach ($kuryri as $kuryr){
     echo "<th>Počet objednávek</th>";
     foreach ($pocet_obj as $pocet){
         echo "<td>$pocet[pocet]</td>";
+    }
+    echo "</tr>"
+    ?>
+</table>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>Id</th>
+        <th>Jméno</th>
+        <th>Příjmení</th>
+    </tr>
+<?php
+$zakaznici = mysqli_query($mysqli, "SELECT * FROM zakaznik", MYSQLI_USE_RESULT);
+foreach ($zakaznici as $zakaznik){
+        echo "<tr>";
+        echo "<td>$zakaznik[idz]</td>";
+        echo "<td>$zakaznik[jmeno]</td>";
+        echo "<td>$zakaznik[prijmeni]</td>";
+        echo "</tr>";
+    }
+?>
+</table>
+<table class="table table-striped table-hover">
+    <?php
+    $pocet_prod = mysqli_query($mysqli, "SELECT count(*) as pocetp FROM produkt", MYSQLI_USE_RESULT);
+    echo "<tr>";
+    echo "<th>Počet produktů</th>";
+    foreach ($pocet_prod as $pocetp){
+        echo "<td>$pocetp[pocetp]</td>";
     }
     echo "</tr>"
     ?>
