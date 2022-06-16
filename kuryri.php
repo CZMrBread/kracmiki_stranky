@@ -10,6 +10,41 @@
 <body class="bg-light">
 <?php include("navbar.html") ?>
 <main class="container pt-5">
+
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#pridatKuryra">
+        Přidat kurýra
+    </button>
+
+    <div class="modal fade" id="pridatKuryra" tabindex="-1" aria-labelledby="pridatKuryraLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen-md-down modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pridatKuryraLabel">Přidat kurýra</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="jmenoInput" placeholder="name@example.com">
+                            <label for="jmenoInput">Jméno</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="prijmeniInput" placeholder="name@example.com">
+                            <label for="prijmeniInput">Příjmení</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="tel" class="form-control" id="telefonInput" placeholder="name@example.com">
+                            <label for="telefonInput">Telefon</label>
+                        </div>
+                        <button type='submit' class='w-100 btn btn-primary'>Přidat kurýra</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="w-100 btn btn-danger" data-bs-dismiss="modal">Zavřít</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <?php
     $mysqli = new mysqli("localhost","root","","rozvoz");
     // Check connection
@@ -39,23 +74,32 @@ Editovat            </button>
 
 <!-- Modal -->
 <div class='modal fade' id='exampleModal$kuryr[idk]' tabindex='-1' aria-labelledby='exampleModalLabel$kuryr[idk]' aria-hidden='true'>
-  <div class='modal-dialog'>
+  <div class='modal-dialog modal-fullscreen-md-down modal-dialog-centered'>
     <div class='modal-content'>
       <div class='modal-header'>
         <h5 class='modal-title' id='exampleModalLabel$kuryr[idk]'>Modal title</h5>
         <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
       </div>
       <div class='modal-body'>
-        <form>
+        <form method='post' action='scripts.php'>
+            <input type='hidden' value='$kuryr[idk]'>
             <div class='form-floating mb-3'>
-                <input type='text' value='$kuryr[jmeno]' class='form-control' id='floatingInput' placeholder='name@example.com'>
-                <label for='floatingInput'>Jméno</label>
+                <input type='text' value='$kuryr[jmeno]' class='form-control' id='jmenoInput$kuryr[idk]' placeholder='name@example.com'>
+                <label for='jmenoInput$kuryr[idk]'>Jméno</label>
             </div>
+            <div class='form-floating mb-3'>
+                <input type='text' value='$kuryr[prijmeni]' class='form-control' id='prijmeniInput$kuryr[idk]' placeholder='name@example.com'>
+                <label for='prijmeniInput$kuryr[idk]'>Příjmení</label>
+            </div>
+            <div class='form-floating mb-3'>
+                <input type='tel' value='$kuryr[tel_cislo]' class='form-control' id='telefonInput$kuryr[idk]' placeholder='name@example.com'>
+                <label for='telefonInput$kuryr[idk]'>Telefon</label>
+            </div>
+            <button type='submit' class='w-100 btn btn-primary'>Uložit</button>
         </form>
       </div>
       <div class='modal-footer'>
-        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
-        <button type='button' class='btn btn-primary'>Save changes</button>
+        <button type='button' class='w-100 btn btn-danger ' data-bs-dismiss='modal'>Zavřít</button>
       </div>
     </div>
   </div>
