@@ -11,19 +11,19 @@
 <?php include("navbar.html") ?>
 <main class="container pt-5">
 
-    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#pridatKuryra">
-        Přidat kurýra
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#pridazakznika">
+        Přidat zákazníka
     </button>
 
-    <div class="modal fade" id="pridatKuryra" tabindex="-1" aria-labelledby="pridatKuryraLabel" aria-hidden="true">
+    <div class="modal fade" id="pridazakznika" tabindex="-1" aria-labelledby="pridazakznikaLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen-md-down modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="pridatKuryraLabel">Přidat kurýra</h5>
+                    <h5 class="modal-title" id="pridazakznikaLabel">Přidat zákazníka</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="kuryr_script.php">
+                    <form method="post" action="zakaznici_script.php">
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="jmenoInput" name="jmeno" placeholder="name@example.com">
                             <label for="jmenoInput">Jméno</label>
@@ -36,7 +36,11 @@
                             <input type="tel" class="form-control" id="telefonInput" name="telefon" placeholder="name@example.com">
                             <label for="telefonInput">Telefon</label>
                         </div>
-                        <input type='submit' class='w-100 btn btn-primary' name="add" value="Přidat kurýra">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="adresaInput" name="adresa" placeholder="name@example.com">
+                            <label for="adresaInput">Adresa</label>
+                        </div>
+                        <input type='submit' class='w-100 btn btn-primary' name="add" value="Přidat zákazníka">
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -58,42 +62,51 @@
             <th>Id</th>
             <th>Jméno</th>
             <th>Příjmení</th>
+            <th>Telefon</th>
+            <th>Adresa</th>
             <th>Edit</th>
         </tr>
         <?php
-        $kuryri = mysqli_query($mysqli, "SELECT * FROM kuryr", MYSQLI_USE_RESULT);
-        foreach ($kuryri as $kuryr){
+        $zakaznici = mysqli_query($mysqli, "SELECT * FROM zakaznik", MYSQLI_USE_RESULT);
+        foreach ($zakaznici as $zakaznik){
             echo "<tr>";
-            echo "<td>$kuryr[idk]</td>";
-            echo "<td>$kuryr[jmeno]</td>";
-            echo "<td>$kuryr[prijmeni]</td>";
+            echo "<td>$zakaznik[idz]</td>";
+            echo "<td>$zakaznik[jmeno]</td>";
+            echo "<td>$zakaznik[prijmeni]</td>";
+            echo "<td>$zakaznik[tel_cislo]</td>";
+            echo "<td>$zakaznik[adresa]</td>";
             echo "<td>
 <!-- Button trigger modal -->
-<button type='button' class='w-100 btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal$kuryr[idk]'>
-Editovat            </button>
+<button type='button' class='w-100 btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal$zakaznik[idz]'>
+Editovat
+</button>
 
 <!-- Modal -->
-<div class='modal fade' id='exampleModal$kuryr[idk]' tabindex='-1' aria-labelledby='exampleModalLabel$kuryr[idk]' aria-hidden='true'>
+<div class='modal fade' id='exampleModal$zakaznik[idz]' tabindex='-1' aria-labelledby='exampleModalLabel$zakaznik[idz]' aria-hidden='true'>
   <div class='modal-dialog modal-fullscreen-md-down modal-dialog-centered'>
     <div class='modal-content'>
       <div class='modal-header'>
-        <h5 class='modal-title' id='exampleModalLabel$kuryr[idk]'>Editovat zákazníka</h5>
+        <h5 class='modal-title' id='exampleModalLabel$zakaznik[idz]'>Editovat zákazníka</h5>
         <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
       </div>
       <div class='modal-body'>
-        <form method='post' action='kuryr_script.php'>
-            <input type='hidden' value='$kuryr[idk]' name='idk'>
+        <form method='post' action='zakaznici_script.php'>
+            <input type='hidden' value='$zakaznik[idz]' name='idz'>
             <div class='form-floating mb-3'>
-                <input type='text' value='$kuryr[jmeno]' class='form-control' id='jmenoInput$kuryr[idk]' name='jmeno' placeholder='name@example.com'>
-                <label for='jmenoInput$kuryr[idk]'>Jméno</label>
+                <input type='text' value='$zakaznik[jmeno]' class='form-control' id='jmenoInput$zakaznik[idz]' name='jmeno' placeholder='name@example.com'>
+                <label for='jmenoInput$zakaznik[idz]'>Jméno</label>
             </div>
             <div class='form-floating mb-3'>
-                <input type='text' value='$kuryr[prijmeni]' class='form-control' id='prijmeniInput$kuryr[idk]' name='prijmeni' placeholder='name@example.com'>
-                <label for='prijmeniInput$kuryr[idk]'>Příjmení</label>
+                <input type='text' value='$zakaznik[prijmeni]' class='form-control' id='prijmeniInput$zakaznik[idz]' name='prijmeni' placeholder='name@example.com'>
+                <label for='prijmeniInput$zakaznik[idz]'>Příjmení</label>
             </div>
             <div class='form-floating mb-3'>
-                <input type='tel' value='$kuryr[tel_cislo]' class='form-control' id='telefonInput$kuryr[idk]' name='telefon' placeholder='name@example.com'>
-                <label for='telefonInput$kuryr[idk]'>Telefon</label>
+                <input type='tel' value='$zakaznik[tel_cislo]' class='form-control' id='telInput$zakaznik[idz]' name='telefon' placeholder='name@example.com'>
+                <label for='telInput$zakaznik[idz]'>Telefon</label>
+            </div>
+            <div class='form-floating mb-3'>
+                <input type='text' value='$zakaznik[adresa]' class='form-control' id='adresaInput$zakaznik[idz]' name='adresa' placeholder='name@example.com'>
+                <label for='adresaInput$zakaznik[idz]'>Adresa</label>
             </div>
             <input type='submit' name='edit' class='w-100 btn btn-primary' value='Uložit'>
         </form>

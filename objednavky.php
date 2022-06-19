@@ -67,6 +67,7 @@ if ($mysqli -> connect_errno) {
 <br>
     <table class="table table-striped table-hove">
         <tr>
+            <th>Číslo objednávky</th>
             <th>Typ platby</th>
             <th>Produkty</th>
             <th>Cena celkem</th>
@@ -75,6 +76,7 @@ if ($mysqli -> connect_errno) {
         $objednavky = mysqli_query($mysqli, "SELECT * FROM objednavka");
         foreach ($objednavky as $objednavka){
             echo "<tr>";
+            echo "<td>",$objednavka["ido"],"</td>";
             echo "<td>",$objednavka["typ_platby"],"</td>";
             $select = "SELECT nazev, cena, mnozstvi FROM kosik join produkt on kosik.idp=produkt.idp where ido='$objednavka[ido]'";
             $produkty = mysqli_query($mysqli, $select);
